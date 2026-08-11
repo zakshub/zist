@@ -1,0 +1,2 @@
+import{FacebookDeliveryRepository,migrate,openDatabase}from'@zak/db';
+const db=openDatabase();try{migrate(db);const delivery=new FacebookDeliveryRepository(db);const candidate=delivery.approvedCandidate();console.log(JSON.stringify(candidate?{eligible:true,id:candidate.id,dryRun:true}:{eligible:false,reason:'No APPROVED Facebook Page post with a public Blogger URL.',deliveryAttempts:delivery.count()},null,2))}finally{db.close()}

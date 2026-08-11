@@ -1,9 +1,9 @@
 # Project Status
 
-- Current phase: Phase 10 — Facebook Page API
-- Status: Ready to begin with mock adapter; live Meta credentials deferred
-- Last completed milestone: Phase 9 — Facebook Page Content
-- Next: Verify current official Meta Page publishing documentation, build dry-run adapter, approval guard, and idempotent publish records
+- Current phase: Phase 11 — Scheduling
+- Status: Ready to begin
+- Last completed milestone: Phase 10 — Facebook Page API Dry Run
+- Next: Add Karachi-time posting windows, minimum gaps, daily budgets, opportunity thresholds, and deterministic scheduling recommendations
 - External integrations: Mocked; no credentials required
 
 ## Phase 1 verification
@@ -91,3 +91,12 @@
 - Facebook Review route: production build passed
 - No Meta SDK, token, request, scheduling, or publishing code invoked
 - Lint, typecheck, tests (17), and build: passed
+
+## Phase 10 verification
+
+- Official Meta Page feed endpoint, Page token, permissions, and scheduling parameters verified
+- Provider requires `APPROVED`, `dryRun=true`, and `published=false`
+- Current `WAITING_FOR_BLOG` packages were rejected as ineligible
+- Delivery-attempt count remained zero
+- Graph version, Page ID, and token remain configuration-only and absent
+- Lint, typecheck, tests (18), and build: passed

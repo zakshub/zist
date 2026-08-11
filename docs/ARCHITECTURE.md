@@ -43,3 +43,7 @@ required or touched during dry runs.
 Facebook content generation is separate from Meta delivery. Three validated Urdu Page variants are
 stored with a single `BLOG_URL` token and remain `WAITING_FOR_BLOG` while the Blogger record is only
 a mock draft. The schema has no path from generated content directly to published state.
+
+Meta delivery follows the verified Page feed contract but remains mock-only. Delivery must reject
+anything outside `APPROVED`, and dry-run mode remains mandatory until credentials and explicit live
+authorization are supplied. Graph API versions are configuration, not hardcoded assumptions.

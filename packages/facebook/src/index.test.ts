@@ -1,2 +1,3 @@
-import{expect,it}from'vitest';import{MockFacebookContentGenerator,validateVariants}from'./index.js';
+import{expect,it}from'vitest';import{MockFacebookContentGenerator,MockMetaPageProvider,validateVariants}from'./index.js';
 it('generates three distinct valid Urdu Page variants',()=>{const variants=new MockFacebookContentGenerator().generate({title:'معاشرہ: نیا زاویہ',excerpt:'ایک مختصر تعارف',angle:'اختلاف اور مکالمہ',labels:['معاشرہ','فکر']});expect(validateVariants(variants)).toEqual([]);expect(new Set(Object.values(variants)).size).toBe(3)});
+it('permits only approved dry-run unpublished delivery',async()=>{const provider=new MockMetaPageProvider();const response=await provider.publish({pageId:'mock',message:'متن',link:'https://example.com',status:'APPROVED',dryRun:true,published:false});expect(response.dryRun).toBe(true);expect(response.externalPostId).toMatch(/^mock-page-/)});

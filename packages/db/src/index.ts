@@ -134,6 +134,13 @@ export function migrate(database: DatabaseSync): void {
       CHECK(status IN ('WAITING_FOR_BLOG','READY_FOR_REVIEW','APPROVED','SCHEDULED','PUBLISHING','PUBLISHED','REJECTED','FAILED'))
     );
     INSERT OR IGNORE INTO schema_migrations(version) VALUES (8);
+
+    CREATE TABLE IF NOT EXISTS facebook_delivery_attempts (
+      id TEXT PRIMARY KEY, facebook_page_post_id TEXT NOT NULL REFERENCES facebook_page_posts(id),
+      request_hash TEXT NOT NULL UNIQUE, provider TEXT NOT NULL, dry_run INTEGER NOT NULL CHECK(dry_run=1),
+      external_post_id TEXT, outcome TEXT NOT NULL, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
+    INSERT OR IGNORE INTO schema_migrations(version) VALUES (9);
   `);
 }
 
@@ -149,3 +156,4 @@ export { BloggerPublicationRepository } from './blogger-publication-repository.j
 export type { BloggerPublicationRecord, NewBloggerPublication, BloggerDraftCandidate } from './blogger-publication-repository.js';
 export { FacebookPagePostRepository } from './facebook-page-post-repository.js';
 export type { FacebookContentCandidate, FacebookPagePostRecord, NewFacebookPagePost } from './facebook-page-post-repository.js';
+export { FacebookDeliveryRepository } from './facebook-delivery-repository.js';
