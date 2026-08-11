@@ -14,6 +14,9 @@ importers:
       '@types/node':
         specifier: ^24.10.1
         version: 24.13.3
+      '@zak/ai':
+        specifier: workspace:*
+        version: link:packages/ai
       '@zak/core':
         specifier: workspace:*
         version: link:packages/core
@@ -73,6 +76,12 @@ importers:
       tsx:
         specifier: ^4.21.0
         version: 4.23.12
+
+  packages/ai:
+    dependencies:
+      '@zak/db':
+        specifier: workspace:*
+        version: link:../db
 
   packages/core:
     dependencies:

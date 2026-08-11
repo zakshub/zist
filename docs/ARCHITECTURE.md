@@ -24,3 +24,8 @@ uses the absence of an analysis row, making interrupted and repeated runs natura
 Topic ranking version `memory-v1` uses 30% novelty, 25% relevance/evergreen value, 30% source
 quality, and 15% diversity. Every candidate links to its supporting source posts. Refreshes upsert
 scores transactionally and do not duplicate candidates or provenance links.
+
+Article generation is a review-only pipeline. `@zak/ai` creates an angle, structured Urdu draft,
+SEO package, labels, similarity score, and editorial notes. `ArticleRepository` atomically stores the
+draft, immutable version 1, and source provenance. Repeated generation creates a new record and
+collision-safe slug; it never overwrites a human-editable draft.

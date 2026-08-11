@@ -7,6 +7,7 @@ export interface TopicCandidate {
   diversityScore: number; finalScore: number; scoringVersion: string;
 }
 export interface TopicRefreshReport { analyzedPosts: number; candidates: number; scoringVersion: string }
+export interface TopicGenerationContext { topic: TopicCandidate; sources: { id: string; text: string }[] }
 
 type AggregateRow = { category: string; post_count: number; avg_quality: number; avg_evergreen: number; themes: string };
 
@@ -58,5 +59,13 @@ export class TopicRepository {
       noveltyScore: Number(row.novelty_score), relevanceScore: Number(row.relevance_score), qualityScore: Number(row.quality_score),
       diversityScore: Number(row.diversity_score), finalScore: Number(row.final_score), scoringVersion: String(row.scoring_version),
     }));
+  }
+
+  topForGeneration(): TopicGenerationContext | null {
+    const topic = this.list(1)[0]; if (!topic) return null;
+    const sources = this.database.prepare(`SELECT p.id,p.original_text text FROM topic_source_posts l
+      JOIN source_posts p ON p.id=l.source_post_id WHERE l.topic_id=? ORDER BY p.original_date DESC LIMIT 8`)
+      .all(topic.id) as { id: string; text: string }[];
+    return { topic, sources };
   }
 }

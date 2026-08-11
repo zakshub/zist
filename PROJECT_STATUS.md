@@ -1,9 +1,9 @@
 # Project Status
 
-- Current phase: Phase 6 — Article Pipeline
+- Current phase: Phase 7 — Image System
 - Status: Ready to begin
-- Last completed milestone: Phase 5 — Topic Engine
-- Next: Build angle generation, Urdu article drafting, editorial review, provenance, similarity safety, and versioning
+- Last completed milestone: Phase 6 — Article Pipeline
+- Next: Add image briefs, prompt safety, local mock assets, approval states, and article association
 - External integrations: Mocked; no credentials required
 
 ## Phase 1 verification
@@ -53,3 +53,13 @@
 - Topic-to-source provenance links persisted
 - Topic Explorer route: production build passed
 - Lint, typecheck, tests (9), and build: passed
+
+## Phase 6 verification
+
+- Topic, angle, Urdu draft, SEO package, and labels persisted
+- Similarity safety and editorial notes persisted
+- Immutable version 1 and source provenance persisted transactionally
+- Two repeat generations succeeded without slug collision or overwrite
+- Both drafts remained `REVIEW_REQUIRED`; no publication path invoked
+- Article Review route: production build passed
+- Lint, typecheck, tests (12), and build: passed

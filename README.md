@@ -36,6 +36,7 @@ Analyze pending posts with the deterministic local provider:
 ```powershell
 pnpm.cmd analyze:content -- 25
 pnpm.cmd topics:refresh
+pnpm.cmd generate:article
 ```
 
 ## Quality checks

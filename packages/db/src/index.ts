@@ -86,10 +86,33 @@ export function migrate(database: DatabaseSync): void {
       PRIMARY KEY(topic_id, source_post_id)
     );
     INSERT OR IGNORE INTO schema_migrations(version) VALUES (4);
+
+    CREATE TABLE IF NOT EXISTS articles (
+      id TEXT PRIMARY KEY, topic_id TEXT NOT NULL REFERENCES topics(id), title TEXT NOT NULL,
+      slug TEXT NOT NULL UNIQUE, excerpt TEXT NOT NULL, content_markdown TEXT NOT NULL,
+      seo_title TEXT NOT NULL, seo_description TEXT NOT NULL, labels_json TEXT NOT NULL,
+      angle TEXT NOT NULL, generation_model TEXT NOT NULL, prompt_version TEXT NOT NULL,
+      quality_score REAL NOT NULL, similarity_score REAL NOT NULL, editorial_notes_json TEXT NOT NULL,
+      status TEXT NOT NULL DEFAULT 'REVIEW_REQUIRED', current_version INTEGER NOT NULL DEFAULT 1,
+      created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      approved_at TEXT, published_at TEXT
+    );
+    CREATE TABLE IF NOT EXISTS article_versions (
+      article_id TEXT NOT NULL REFERENCES articles(id) ON DELETE CASCADE, version INTEGER NOT NULL,
+      title TEXT NOT NULL, content_markdown TEXT NOT NULL, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      created_by TEXT NOT NULL, PRIMARY KEY(article_id, version)
+    );
+    CREATE TABLE IF NOT EXISTS article_sources (
+      article_id TEXT NOT NULL REFERENCES articles(id) ON DELETE CASCADE,
+      source_post_id TEXT NOT NULL REFERENCES source_posts(id), PRIMARY KEY(article_id, source_post_id)
+    );
+    INSERT OR IGNORE INTO schema_migrations(version) VALUES (5);
   `);
 }
 
 export { SourcePostRepository } from './source-post-repository.js';
 export type { NewSourcePost, SourcePost, SourcePostSummary } from './source-post-repository.js';
 export { TopicRepository } from './topic-repository.js';
-export type { TopicCandidate, TopicRefreshReport } from './topic-repository.js';
+export type { TopicCandidate, TopicRefreshReport, TopicGenerationContext } from './topic-repository.js';
+export { ArticleRepository } from './article-repository.js';
+export type { ArticleDraftRecord, NewArticleDraft } from './article-repository.js';
