@@ -1,9 +1,9 @@
 # Project Status
 
-- Current phase: Phase 11 — Scheduling
-- Status: Ready to begin
-- Last completed milestone: Phase 10 — Facebook Page API Dry Run
-- Next: Add Karachi-time posting windows, minimum gaps, daily budgets, opportunity thresholds, and deterministic scheduling recommendations
+- Current phase: Phase 12 — Analytics
+- Status: Ready to begin with mock/local observations
+- Last completed milestone: Phase 11 — Scheduling
+- Next: Add immutable performance snapshots, normalized rates, confidence-aware aggregates, and topic/timing feedback views
 - External integrations: Mocked; no credentials required
 
 ## Phase 1 verification
@@ -100,3 +100,13 @@
 - Delivery-attempt count remained zero
 - Graph version, Page ID, and token remain configuration-only and absent
 - Lint, typecheck, tests (18), and build: passed
+
+## Phase 11 verification
+
+- Deterministic Asia/Karachi policy with 13:00, 19:30, and 21:30 windows
+- Minimum opportunity 0.65, six-hour gap, two-post daily budget, seven-day horizon
+- Fixed-clock run recommended 19:30 PKT then next-day 13:00 PKT
+- Second run created zero duplicate recommendations
+- Facebook workflow states remained unchanged
+- Schedule route: production build passed
+- Lint, typecheck, tests (20), and build: passed

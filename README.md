@@ -40,6 +40,7 @@ pnpm.cmd generate:article
 pnpm.cmd generate:image
 pnpm.cmd blogger:test
 pnpm.cmd facebook:content
+pnpm.cmd schedule:recommend
 ```
 
 ## Quality checks

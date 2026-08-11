@@ -141,6 +141,14 @@ export function migrate(database: DatabaseSync): void {
       external_post_id TEXT, outcome TEXT NOT NULL, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
     );
     INSERT OR IGNORE INTO schema_migrations(version) VALUES (9);
+
+    CREATE TABLE IF NOT EXISTS schedule_recommendations (
+      id TEXT PRIMARY KEY, facebook_page_post_id TEXT NOT NULL UNIQUE REFERENCES facebook_page_posts(id),
+      scheduled_at TEXT NOT NULL, timezone TEXT NOT NULL, local_label TEXT NOT NULL, reason TEXT NOT NULL,
+      opportunity_score REAL NOT NULL, policy_version TEXT NOT NULL, status TEXT NOT NULL DEFAULT 'RECOMMENDED',
+      created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
+    INSERT OR IGNORE INTO schema_migrations(version) VALUES (10);
   `);
 }
 
@@ -157,3 +165,4 @@ export type { BloggerPublicationRecord, NewBloggerPublication, BloggerDraftCandi
 export { FacebookPagePostRepository } from './facebook-page-post-repository.js';
 export type { FacebookContentCandidate, FacebookPagePostRecord, NewFacebookPagePost } from './facebook-page-post-repository.js';
 export { FacebookDeliveryRepository } from './facebook-delivery-repository.js';
+export { ScheduleRepository } from './schedule-repository.js';

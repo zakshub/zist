@@ -47,3 +47,7 @@ a mock draft. The schema has no path from generated content directly to publishe
 Meta delivery follows the verified Page feed contract but remains mock-only. Delivery must reject
 anything outside `APPROVED`, and dry-run mode remains mandatory until credentials and explicit live
 authorization are supplied. Graph API versions are configuration, not hardcoded assumptions.
+
+Scheduling is recommendation-only. Policy `karachi-v1` evaluates fixed local windows, minimum
+opportunity, daily budget, and cross-post gap against UTC timestamps. Recommendations are persisted
+without mutating Facebook workflow state, so timing logic cannot implicitly approve content.
