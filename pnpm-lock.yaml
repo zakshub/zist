@@ -14,6 +14,12 @@ importers:
       '@types/node':
         specifier: ^24.10.1
         version: 24.13.3
+      '@zak/db':
+        specifier: workspace:*
+        version: link:packages/db
+      '@zak/importer':
+        specifier: workspace:*
+        version: link:packages/importer
       eslint:
         specifier: ^9.39.1
         version: 9.39.5(supports-color@7.2.0)
@@ -76,6 +82,12 @@ importers:
       tsx:
         specifier: ^4.21.0
         version: 4.23.12
+
+  packages/importer:
+    dependencies:
+      '@zak/db':
+        specifier: workspace:*
+        version: link:../db
 
 packages:
 

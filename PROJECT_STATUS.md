@@ -1,9 +1,9 @@
 # Project Status
 
-- Current phase: Phase 3 — Archive Import Framework
+- Current phase: Phase 4 — Content Analysis
 - Status: Ready to begin
-- Last completed milestone: Phase 2 — Data Model + Mock Archive
-- Next: Add TXT, JSON, and CSV importers with normalization, duplicate detection, and import reports
+- Last completed milestone: Phase 3 — Archive Import Framework
+- Next: Add mock analysis pipeline for summaries, categories, themes, tone, and quality signals
 - External integrations: Mocked; no credentials required
 
 ## Phase 1 verification
@@ -26,3 +26,13 @@
 - Content Memory screen: production build passed
 - Mojibake regression in dashboard Urdu copy: corrected
 - Lint, typecheck, tests (3), and build: passed
+
+## Phase 3 verification
+
+- TXT paragraph importer: passed through CLI
+- JSON array importer: passed through CLI
+- Quoted CSV importer: passed through CLI
+- Unicode/whitespace duplicate detection: passed
+- Privacy-safe reports: counts and row numbers only
+- Operational scripts included in typecheck
+- Lint, typecheck, tests (6), and build: passed

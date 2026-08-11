@@ -22,6 +22,15 @@ pnpm.cmd dev
 Open http://localhost:3000. Run `pnpm.cmd doctor` for a redacted environment report.
 The seeded Content Memory screen is available at http://localhost:3000/content-memory.
 
+## Archive importer
+
+TXT paragraphs, JSON arrays, and quoted CSV files are supported. Import reports contain row numbers
+and counts, not private post text.
+
+```powershell
+pnpm.cmd import:archive -- data/sample/example.csv
+```
+
 ## Quality checks
 
 ```powershell
