@@ -29,3 +29,8 @@ Article generation is a review-only pipeline. `@zak/ai` creates an angle, struct
 SEO package, labels, similarity score, and editorial notes. `ArticleRepository` atomically stores the
 draft, immutable version 1, and source provenance. Repeated generation creates a new record and
 collision-safe slug; it never overwrites a human-editable draft.
+
+Image direction and rendering are separate. The director persists concept, mood, composition,
+prompt, and negative restrictions before rendering. The local mock renderer produces a real 1600×900
+text-free SVG under ignored storage. `generated_images` retains article association and review state;
+future OpenAI image output will use the same repository contract.

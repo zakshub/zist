@@ -1,9 +1,9 @@
 # Project Status
 
-- Current phase: Phase 7 — Image System
-- Status: Ready to begin
-- Last completed milestone: Phase 6 — Article Pipeline
-- Next: Add image briefs, prompt safety, local mock assets, approval states, and article association
+- Current phase: Phase 8 — Blogger
+- Status: Ready to begin with mock adapter; live OAuth deferred
+- Last completed milestone: Phase 7 — Image System
+- Next: Verify current Blogger API documentation, build adapter contract, HTML rendering, dry-run draft requests, and publication records
 - External integrations: Mocked; no credentials required
 
 ## Phase 1 verification
@@ -63,3 +63,12 @@
 - Both drafts remained `REVIEW_REQUIRED`; no publication path invoked
 - Article Review route: production build passed
 - Lint, typecheck, tests (12), and build: passed
+
+## Phase 7 verification
+
+- Structured visual briefs and negative instructions persisted
+- Two real local 1600×900 SVG assets generated for two drafts
+- Assets contain no text nodes, logos, watermarks, AI-brain, or handshake imagery
+- One-image-per-article constraint and review state persisted
+- Image Review route: production build passed
+- Lint, typecheck, tests (14), and build: passed

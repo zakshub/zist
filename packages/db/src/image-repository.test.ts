@@ -1,0 +1,2 @@
+import{DatabaseSync}from'node:sqlite';import{expect,it}from'vitest';import{migrate}from'./index.js';import{ImageRepository}from'./image-repository.js';
+it('requires an article and enforces one image record per article',()=>{const db=new DatabaseSync(':memory:');migrate(db);const images=new ImageRepository(db);expect(()=>images.create({articleId:'missing',brief:{concept:'x'},prompt:'x',negativeInstructions:['text'],style:'editorial',aspectRatio:'16:9',model:'mock'})).toThrow(/FOREIGN KEY/);db.close()});

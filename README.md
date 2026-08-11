@@ -37,6 +37,7 @@ Analyze pending posts with the deterministic local provider:
 pnpm.cmd analyze:content -- 25
 pnpm.cmd topics:refresh
 pnpm.cmd generate:article
+pnpm.cmd generate:image
 ```
 
 ## Quality checks

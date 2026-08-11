@@ -107,6 +107,15 @@ export function migrate(database: DatabaseSync): void {
       source_post_id TEXT NOT NULL REFERENCES source_posts(id), PRIMARY KEY(article_id, source_post_id)
     );
     INSERT OR IGNORE INTO schema_migrations(version) VALUES (5);
+
+    CREATE TABLE IF NOT EXISTS generated_images (
+      id TEXT PRIMARY KEY, article_id TEXT NOT NULL REFERENCES articles(id) ON DELETE CASCADE,
+      brief_json TEXT NOT NULL, prompt TEXT NOT NULL, negative_instructions_json TEXT NOT NULL,
+      style TEXT NOT NULL, aspect_ratio TEXT NOT NULL, model TEXT NOT NULL, local_path TEXT,
+      remote_url TEXT, status TEXT NOT NULL DEFAULT 'GENERATED', created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      approved_at TEXT, UNIQUE(article_id)
+    );
+    INSERT OR IGNORE INTO schema_migrations(version) VALUES (6);
   `);
 }
 
@@ -116,3 +125,5 @@ export { TopicRepository } from './topic-repository.js';
 export type { TopicCandidate, TopicRefreshReport, TopicGenerationContext } from './topic-repository.js';
 export { ArticleRepository } from './article-repository.js';
 export type { ArticleDraftRecord, NewArticleDraft } from './article-repository.js';
+export { ImageRepository } from './image-repository.js';
+export type { GeneratedImageRecord, NewGeneratedImage } from './image-repository.js';
