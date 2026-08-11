@@ -1,5 +1,10 @@
 # Private Archive Handoff
 
+The CLI accepts either one `.txt`, `.json`, or `.csv` archive file, or a directory containing
+individual `.txt` posts. For directory imports, each non-empty text file is one post; an ISO date
+at the end of its filename is retained as `originalDate`. Empty and non-TXT files are counted in
+the preview but never imported.
+
 Do not commit or upload the archive to GitHub. Put the export inside local `data/private/`, which is
 ignored by Git.
 

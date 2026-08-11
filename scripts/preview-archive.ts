@@ -1,2 +1,10 @@
-import { readFileSync } from 'node:fs'; import { basename, resolve } from 'node:path'; import { inspectArchive } from '@zak/importer';
-const requestedPath=process.argv.slice(2).find(argument=>argument!=='--');if(!requestedPath){console.error('Usage: pnpm import:preview -- <archive.txt|json|csv>');process.exit(1)}const path=resolve(requestedPath);console.log(JSON.stringify(inspectArchive(readFileSync(path,'utf8'),basename(path)),null,2));
+import { inspectArchive } from '@zak/importer';
+import { loadArchiveInput } from './archive-input.js';
+
+const requestedPath = process.argv.slice(2).find((argument) => argument !== '--');
+if (!requestedPath) {
+  console.error('Usage: pnpm import:preview -- <archive.txt|json|csv|directory>');
+  process.exit(1);
+}
+const archive = loadArchiveInput(requestedPath);
+console.log(JSON.stringify({ input: archive.input, inspection: inspectArchive(archive.content, archive.fileName) }, null, 2));

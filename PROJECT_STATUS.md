@@ -1,9 +1,9 @@
 # Project Status
 
-- Current phase: Phase 13 — Real Archive Adapter
-- Status: Awaiting private archive file for preview and import
-- Last completed milestone: Phase 12 — Analytics
-- Next: Place the real export under `data/private/`; preview it, inspect the report, then import and analyze it
+- Current phase: Phase 14 — VPS Preparation
+- Status: Phase 13 complete; Phase 14 implementation in progress
+- Last completed milestone: Phase 13 — Real Archive Adapter
+- Next: Create and verify production-process, reverse-proxy, environment, backup, migration, persistence, and health-check artifacts
 - External integrations: Mocked; no credentials required
 
 ## Phase 1 verification
@@ -129,4 +129,9 @@
 - 7,000 synthetic Urdu records imported; replay classified all 7,000 as duplicates
 - Import Runs route: production build passed
 - Lint, typecheck, tests (24), and build: passed
-- Remaining acceptance: preview and import the user-provided private archive
+- Directory adapter treats every non-empty `.txt` file as one post and preserves filename dates
+- Real archive preview: 7,267 files accounted for; 7,264 candidates, 2 empty, 1 non-post utility
+- Privacy preview: 4 phone patterns, 0 emails, 0 credential-like tokens in the post corpus
+- Real archive import: 6,784 unique posts imported, 480 exact duplicates skipped, 0 invalid
+- Full-corpus analysis: 6,784 newly analyzed, 6,794 total including fixtures, 0 pending, 0 failed
+- Topic memory refreshed from all 6,794 analyzed records; raw archive remains local and uncommitted
