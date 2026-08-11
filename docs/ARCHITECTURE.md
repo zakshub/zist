@@ -9,3 +9,6 @@ SQLite uses Node's built-in `node:sqlite` module. Repositories form the portabil
 later PostgreSQL migration. The app binds to localhost; publishing is disabled and providers are
 mocked by default.
 
+`SourcePostRepository` is the only Phase 2 persistence entry point for content memory. It normalizes
+Unicode and whitespace, calculates a SHA-256 content hash, and enforces both content-level and
+source/external-ID uniqueness before archive data can enter the system.

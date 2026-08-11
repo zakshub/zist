@@ -4,7 +4,7 @@
   "type": "module",
   "packageManager": "pnpm@11.16.0",
   "scripts": {
-    "dev": "pnpm --parallel --filter @zak/web --filter @zak/worker dev",
+    "dev": "pnpm --filter @zak/db build && pnpm --parallel --filter @zak/web --filter @zak/worker dev",
     "build": "pnpm -r build",
     "lint": "eslint .",
     "typecheck": "pnpm -r typecheck",

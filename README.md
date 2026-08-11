@@ -15,10 +15,12 @@ Requires Node.js 24+ and pnpm 11+.
 Copy-Item .env.example .env
 pnpm.cmd install
 pnpm.cmd db:migrate
+pnpm.cmd db:seed
 pnpm.cmd dev
 ```
 
 Open http://localhost:3000. Run `pnpm.cmd doctor` for a redacted environment report.
+The seeded Content Memory screen is available at http://localhost:3000/content-memory.
 
 ## Quality checks
 

@@ -12,5 +12,8 @@ h2 { font-family:Georgia,serif; font-size:54px; line-height:1.05; margin:14px 0;
 article { min-height:88px; border-bottom:1px solid var(--line); gap:24px; } article div { flex:1; } article h3 { margin:0 0 5px; font-size:16px; } article p { margin:0; }
 .number { color:#68635c; } .dot { width:9px; height:9px; border-radius:50%; background:#595650; } .dot.safe { background:var(--accent); box-shadow:0 0 12px #ddff5266; }
 footer { justify-content:space-between; color:var(--muted); padding-top:30px; }
+.action { color:var(--accent); font-size:12px; font-weight:700; text-decoration:none; text-transform:uppercase; letter-spacing:1px; }
+.memory-intro { min-height:300px; display:flex; align-items:center; justify-content:space-between; gap:50px; border-bottom:1px solid var(--line); }
+dl { display:flex; gap:38px; margin:0; } dl div { min-width:72px; } dt { color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:1px; } dd { margin:8px 0 0; font-family:Georgia,serif; font-size:34px; }
+.post-list { border-top:1px solid var(--line); } .post-card { align-items:flex-start; padding:26px 0; } .post-card p { color:var(--ink); font-family:serif; font-size:20px; line-height:1.8; margin:8px 0 0; max-width:780px; } .post-card time { color:var(--muted); direction:ltr; font-size:12px; } .tag { color:var(--accent); font-size:12px; } .empty { color:var(--muted); padding:50px 0; }
 @media (max-width:720px) { .hero { align-items:flex-start; flex-direction:column; padding:60px 0; } h2 { font-size:40px; } header { gap:20px; } }
-
