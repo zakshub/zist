@@ -1,12 +1,21 @@
-import { mkdirSync } from 'node:fs';
+import { existsSync, mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
-import { fileURLToPath } from 'node:url';
 
-export function databasePath(): string {
+function findWorkspaceRoot(start: string): string {
+  let current = resolve(start);
+  while (true) {
+    if (existsSync(resolve(current, 'pnpm-workspace.yaml'))) return current;
+    const parent = dirname(current);
+    if (parent === current) return resolve(start);
+    current = parent;
+  }
+}
+
+export function databasePath(workingDirectory = process.cwd()): string {
   const configured = process.env.DATABASE_URL;
-  if (configured) return resolve(process.cwd(), configured.replace(/^file:/, ''));
-  return fileURLToPath(new URL('../../../storage/content-engine.sqlite', import.meta.url));
+  if (configured) return resolve(workingDirectory, configured.replace(/^file:/, ''));
+  return resolve(findWorkspaceRoot(workingDirectory), 'storage/content-engine.sqlite');
 }
 
 export function openDatabase(path = databasePath()): DatabaseSync {
