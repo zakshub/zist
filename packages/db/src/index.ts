@@ -159,6 +159,15 @@ export function migrate(database: DatabaseSync): void {
       UNIQUE(facebook_page_post_id,captured_at,provider)
     );
     INSERT OR IGNORE INTO schema_migrations(version) VALUES (11);
+
+    CREATE TABLE IF NOT EXISTS archive_import_runs (
+      id TEXT PRIMARY KEY, checksum TEXT NOT NULL UNIQUE, file_name TEXT NOT NULL, format TEXT NOT NULL,
+      status TEXT NOT NULL, total INTEGER NOT NULL, imported INTEGER NOT NULL DEFAULT 0,
+      duplicates INTEGER NOT NULL DEFAULT 0, invalid INTEGER NOT NULL DEFAULT 0,
+      privacy_signals_json TEXT NOT NULL, started_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      completed_at TEXT, error_message TEXT
+    );
+    INSERT OR IGNORE INTO schema_migrations(version) VALUES (12);
   `);
 }
 
@@ -177,3 +186,4 @@ export type { FacebookContentCandidate, FacebookPagePostRecord, NewFacebookPageP
 export { FacebookDeliveryRepository } from './facebook-delivery-repository.js';
 export { ScheduleRepository } from './schedule-repository.js';
 export { AnalyticsRepository } from './analytics-repository.js';
+export { ArchiveImportRunRepository } from './archive-import-run-repository.js';

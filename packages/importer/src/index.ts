@@ -1,8 +1,12 @@
 import { extname } from 'node:path';
+import { createHash } from 'node:crypto';
 import type { NewSourcePost, SourcePostRepository } from '@zak/db';
 
 export interface ImportIssue { row: number; code: 'INVALID' | 'DUPLICATE'; message: string }
 export interface ImportReport { format: 'txt' | 'json' | 'csv'; total: number; imported: number; duplicates: number; invalid: number; issues: ImportIssue[] }
+export interface ArchiveInspection{format:ImportReport['format'];checksum:string;records:number;characters:number;privacySignals:{emails:number;phoneNumbers:number;credentialLikeTokens:number};safeToImport:boolean}
+
+export function inspectArchive(content:string,filename:string):ArchiveInspection{const parsed=parseArchive(content,extname(filename));const count=(pattern:RegExp)=>(content.match(pattern)??[]).length;const privacySignals={emails:count(/[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}/g),phoneNumbers:count(/(?:\+?92|0)3\d{2}[ -]?\d{7}/g),credentialLikeTokens:count(/(?:access[_-]?token|api[_-]?key|secret)\s*[:=]\s*[^\s,;]+/gi)};return{format:parsed.format,checksum:createHash('sha256').update(content,'utf8').digest('hex'),records:parsed.posts.length,characters:[...content].length,privacySignals,safeToImport:privacySignals.credentialLikeTokens===0}}
 
 function asPost(value: unknown, row: number): NewSourcePost {
   if (!value || typeof value !== 'object') throw new Error(`Row ${row} must be an object.`);

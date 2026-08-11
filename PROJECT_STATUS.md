@@ -1,9 +1,9 @@
 # Project Status
 
 - Current phase: Phase 13 — Real Archive Adapter
-- Status: Hardening before private data handoff
+- Status: Awaiting private archive file for preview and import
 - Last completed milestone: Phase 12 — Analytics
-- Next: Add preview-only archive inspection, privacy scan, transactional import runs, resumability, and final readiness audit before requesting 7,000 posts
+- Next: Place the real export under `data/private/`; preview it, inspect the report, then import and analyze it
 - External integrations: Mocked; no credentials required
 
 ## Phase 1 verification
@@ -119,3 +119,14 @@
 - Aggregates expose reach, engagement rate, CTR, sample count, and confidence
 - Analytics route: production build passed
 - Lint, typecheck, tests (22), and build: passed
+
+## Phase 13 readiness verification
+
+- Preview-only checksum, record count, character count, and privacy-signal report: passed
+- Credential-like token detection blocks import before database access
+- Transactional tracked imports and failed-run audit support: passed
+- Identical-file replay stopped by checksum before post writes
+- 7,000 synthetic Urdu records imported; replay classified all 7,000 as duplicates
+- Import Runs route: production build passed
+- Lint, typecheck, tests (24), and build: passed
+- Remaining acceptance: preview and import the user-provided private archive

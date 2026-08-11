@@ -15,6 +15,7 @@
     "db:seed": "pnpm --filter @zak/db seed",
     "import:sample": "pnpm db:seed",
     "import:archive": "pnpm --filter @zak/db build && pnpm --filter @zak/importer build && tsx scripts/import-archive.ts",
+    "import:preview": "pnpm --filter @zak/importer build && tsx scripts/preview-archive.ts",
     "analyze:content": "pnpm --filter @zak/core build && pnpm --filter @zak/db build && tsx scripts/analyze-content.ts",
     "topics:refresh": "pnpm --filter @zak/db build && tsx scripts/refresh-topics.ts",
     "generate:article": "pnpm --filter @zak/db build && pnpm --filter @zak/ai build && tsx scripts/generate-article.ts",

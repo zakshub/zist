@@ -55,3 +55,7 @@ without mutating Facebook workflow state, so timing logic cannot implicitly appr
 Analytics stores immutable raw counters plus derived rates. Provider and capture time are part of the
 idempotency key. Aggregation recomputes weighted rates from totals rather than averaging percentages,
 and exposes sample size and reach-based confidence. Synthetic observations remain labeled `MOCK`.
+
+Real archive ingestion is checksum-tracked and transactional. Preview exposes only aggregate counts
+and privacy-signal counts. Credential-like tokens block import. Import runs are auditable and exact
+file replays stop before record writes. A 7,000-record synthetic scale-and-replay test is mandatory.

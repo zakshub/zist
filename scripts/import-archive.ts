@@ -1,21 +1,21 @@
 import { readFileSync } from 'node:fs';
 import { basename, resolve } from 'node:path';
-import { importArchive } from '@zak/importer';
-import { migrate, openDatabase, SourcePostRepository } from '@zak/db';
+import { importArchive, inspectArchive } from '@zak/importer';
+import { ArchiveImportRunRepository, migrate, openDatabase, SourcePostRepository } from '@zak/db';
 
 const requestedPath = process.argv.slice(2).find((argument) => argument !== '--');
-if (!requestedPath) {
-  console.error('Usage: pnpm import:archive -- <path-to-archive.txt|json|csv>');
-  process.exit(1);
-}
-
-const archivePath = resolve(requestedPath);
-const database = openDatabase();
+if (!requestedPath) { console.error('Usage: pnpm import:archive -- <archive.txt|json|csv>'); process.exit(1); }
+const archivePath = resolve(requestedPath); const fileName = basename(archivePath);
+const content = readFileSync(archivePath, 'utf8'); const inspection = inspectArchive(content, fileName);
+if (!inspection.safeToImport) { console.error(JSON.stringify({ imported: false, reason: 'Credential-like tokens detected. Remove secrets and preview again.', inspection }, null, 2)); process.exit(2); }
+const database = openDatabase(); let runId: string | undefined;
 try {
-  migrate(database);
-  const report = importArchive(readFileSync(archivePath, 'utf8'), basename(archivePath), new SourcePostRepository(database));
-  console.log(JSON.stringify(report, null, 2));
-  if (report.invalid > 0) process.exitCode = 2;
-} finally {
-  database.close();
-}
+  migrate(database); const runs = new ArchiveImportRunRepository(database); const previous = runs.find(inspection.checksum);
+  if (previous) { console.log(JSON.stringify({ imported: false, reason: 'Archive checksum already processed.', previous }, null, 2)); process.exit(0); }
+  const run = runs.start({ checksum: inspection.checksum, fileName, format: inspection.format, total: inspection.records, privacySignals: inspection.privacySignals }); runId = run.id;
+  database.exec('BEGIN');
+  try { const report = importArchive(content, fileName, new SourcePostRepository(database)); database.exec('COMMIT'); runs.complete(run.id, report); console.log(JSON.stringify({ imported: true, inspection, report }, null, 2)); }
+  catch (error) { database.exec('ROLLBACK'); throw error; }
+} catch (error) {
+  if (runId) new ArchiveImportRunRepository(database).fail(runId, error instanceof Error ? error.message : 'Unknown import failure.'); throw error;
+} finally { database.close(); }
