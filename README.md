@@ -31,6 +31,12 @@ and counts, not private post text.
 pnpm.cmd import:archive -- data/sample/example.csv
 ```
 
+Analyze pending posts with the deterministic local provider:
+
+```powershell
+pnpm.cmd analyze:content -- 25
+```
+
 ## Quality checks
 
 ```powershell

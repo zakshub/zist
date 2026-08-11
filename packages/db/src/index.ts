@@ -62,6 +62,15 @@ export function migrate(database: DatabaseSync): void {
     CREATE INDEX IF NOT EXISTS source_posts_original_date_idx ON source_posts(original_date DESC);
     CREATE INDEX IF NOT EXISTS source_posts_category_idx ON source_posts(category);
     INSERT OR IGNORE INTO schema_migrations(version) VALUES (2);
+
+    CREATE TABLE IF NOT EXISTS source_post_analyses (
+      source_post_id TEXT PRIMARY KEY REFERENCES source_posts(id) ON DELETE CASCADE,
+      summary TEXT NOT NULL, central_idea TEXT NOT NULL, category TEXT NOT NULL,
+      themes_json TEXT NOT NULL, tone TEXT NOT NULL, quality_score REAL NOT NULL,
+      evergreen_score REAL NOT NULL, personal_voice_score REAL NOT NULL,
+      analyzer_version TEXT NOT NULL, analyzed_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
+    INSERT OR IGNORE INTO schema_migrations(version) VALUES (3);
   `);
 }
 

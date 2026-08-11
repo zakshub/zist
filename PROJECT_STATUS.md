@@ -1,9 +1,9 @@
 # Project Status
 
-- Current phase: Phase 4 — Content Analysis
+- Current phase: Phase 5 — Topic Engine
 - Status: Ready to begin
-- Last completed milestone: Phase 3 — Archive Import Framework
-- Next: Add mock analysis pipeline for summaries, categories, themes, tone, and quality signals
+- Last completed milestone: Phase 4 — Content Analysis
+- Next: Derive topic candidates from analyzed memory with novelty, relevance, quality, and diversity scoring
 - External integrations: Mocked; no credentials required
 
 ## Phase 1 verification
@@ -36,3 +36,11 @@
 - Privacy-safe reports: counts and row numbers only
 - Operational scripts included in typecheck
 - Lint, typecheck, tests (6), and build: passed
+
+## Phase 4 verification
+
+- Provider-neutral analysis contract and deterministic mock: passed
+- Versioned persisted summaries, central ideas, categories, themes, tone, and scores: passed
+- Resumable batch: first run analyzed 10; second run analyzed 0
+- Content Memory analysis progress: production build passed
+- Lint, typecheck, tests (8), and build: passed

@@ -15,10 +15,12 @@
     "db:seed": "pnpm --filter @zak/db seed",
     "import:sample": "pnpm db:seed",
     "import:archive": "pnpm --filter @zak/db build && pnpm --filter @zak/importer build && tsx scripts/import-archive.ts",
+    "analyze:content": "pnpm --filter @zak/core build && pnpm --filter @zak/db build && tsx scripts/analyze-content.ts",
     "worker": "pnpm --filter @zak/worker start",
     "doctor": "tsx scripts/doctor.ts"
   },
   "devDependencies": {
+    "@zak/core": "workspace:*",
     "@zak/db": "workspace:*",
     "@zak/importer": "workspace:*",
     "@eslint/js": "^9.39.1",

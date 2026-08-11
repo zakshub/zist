@@ -16,3 +16,7 @@ source/external-ID uniqueness before archive data can enter the system.
 `@zak/importer` parses archive formats but never writes directly to SQLite. Every record passes
 through `SourcePostRepository`, so CLI, future dashboard uploads, and the eventual private archive
 adapter share exactly the same normalization and duplicate rules. Import reports omit post bodies.
+
+Content analysis is provider-neutral. `MockContentAnalyzer` supplies deterministic local results;
+`source_post_analyses` stores versioned output separately from immutable source text. Batch selection
+uses the absence of an analysis row, making interrupted and repeated runs naturally resumable.
