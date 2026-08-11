@@ -1,9 +1,9 @@
 # Project Status
 
 - Current phase: Phase 14 — VPS Preparation
-- Status: Phase 13 complete; Phase 14 implementation in progress
+- Status: Phase 14 implemented and locally verified; deployment intentionally not performed
 - Last completed milestone: Phase 13 — Real Archive Adapter
-- Next: Create and verify production-process, reverse-proxy, environment, backup, migration, persistence, and health-check artifacts
+- Next: Provision a VPS and live-provider credentials only when explicitly authorized
 - External integrations: Mocked; no credentials required
 
 ## Phase 1 verification
@@ -135,3 +135,15 @@
 - Real archive import: 6,784 unique posts imported, 480 exact duplicates skipped, 0 invalid
 - Full-corpus analysis: 6,784 newly analyzed, 6,794 total including fixtures, 0 pending, 0 failed
 - Topic memory refreshed from all 6,794 analyzed records; raw archive remains local and uncommitted
+
+## Phase 14 verification
+
+- Production build passed with a database-aware `/api/health` route
+- Runtime health check returned HTTP 200 and a successful SQLite probe
+- PM2 config defines one web process and one compiled worker with restart and memory policies
+- Worker handles SIGTERM/SIGINT and remains in safe idle mode with automation disabled
+- Nginx localhost reverse-proxy example and TLS guidance documented
+- Environment, release, migration, rollback, PM2 boot persistence, and operations documented
+- Online SQLite backup executed successfully with validated retention and off-host guidance
+- Lint, typecheck, tests (25), and build passed
+- No VPS deployment, public exposure, or live provider connection performed

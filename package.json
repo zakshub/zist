@@ -25,6 +25,8 @@
     "facebook:test": "pnpm --filter @zak/db build && pnpm --filter @zak/facebook build && tsx scripts/test-facebook-delivery.ts",
     "schedule:recommend": "pnpm --filter @zak/db build && pnpm --filter @zak/scheduling build && tsx scripts/recommend-schedule.ts",
     "analytics:sample": "pnpm --filter @zak/analytics build && pnpm --filter @zak/db build && tsx scripts/seed-analytics.ts",
+    "backup:database": "pnpm --filter @zak/db build && tsx scripts/backup-database.ts",
+    "start:web": "pnpm --filter @zak/web start",
     "worker": "pnpm --filter @zak/worker start",
     "doctor": "tsx scripts/doctor.ts"
   },
