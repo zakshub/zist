@@ -4,6 +4,9 @@ Local-first Urdu content intelligence and publishing system. Phase 1 provides th
 worker, SQLite foundation, mock-provider contracts, and development tooling. Blogger, Facebook,
 and live AI calls are intentionally not connected yet.
 
+Target Blogger site: https://mehfilz.blogspot.com/. API access remains disabled until the Blogger
+integration phase and will require OAuth credentials plus the numeric Blog ID.
+
 ## Start locally
 
 Requires Node.js 24+ and pnpm 11+.
@@ -28,4 +31,3 @@ pnpm.cmd build
 
 Private archive data belongs in `data/private/`; local databases and generated files belong in
 `storage/`. Both locations are ignored by Git.
-

@@ -15,4 +15,5 @@
 - Tests: 1 passed
 - Production build: passed
 - Development server: reached Next.js ready state on `127.0.0.1:3000`
-- GitHub push: unavailable; GitHub CLI and remote are not configured
+- GitHub repository: `https://github.com/zakshub/zist`
+- Blogger site: `https://mehfilz.blogspot.com/` (public URL only; API authorization deferred)
