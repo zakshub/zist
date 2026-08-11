@@ -1,9 +1,9 @@
 # Project Status
 
-- Current phase: Phase 8 — Blogger
-- Status: Ready to begin with mock adapter; live OAuth deferred
-- Last completed milestone: Phase 7 — Image System
-- Next: Verify current Blogger API documentation, build adapter contract, HTML rendering, dry-run draft requests, and publication records
+- Current phase: Phase 9 — Facebook Page Content
+- Status: Ready to begin
+- Last completed milestone: Phase 8 — Blogger Dry Run
+- Next: Generate Facebook Page captions from Blogger-ready articles with variants, link placement, review states, and no API calls
 - External integrations: Mocked; no credentials required
 
 ## Phase 1 verification
@@ -72,3 +72,13 @@
 - One-image-per-article constraint and review state persisted
 - Image Review route: production build passed
 - Lint, typecheck, tests (14), and build: passed
+
+## Phase 8 verification
+
+- Official Blogger API v3 insert, `isDraft`, OAuth scope, and by-URL lookup verified
+- Escaped RTL HTML rendering passed
+- Two eligible articles created two distinct mock draft records
+- Third run created nothing; one-publication-per-article idempotency passed
+- Request hashes and provider provenance persisted
+- Blogger Queue route: production build passed
+- Lint, typecheck, tests (16), and build: passed

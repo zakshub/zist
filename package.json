@@ -19,10 +19,12 @@
     "topics:refresh": "pnpm --filter @zak/db build && tsx scripts/refresh-topics.ts",
     "generate:article": "pnpm --filter @zak/db build && pnpm --filter @zak/ai build && tsx scripts/generate-article.ts",
     "generate:image": "pnpm --filter @zak/db build && pnpm --filter @zak/ai build && tsx scripts/generate-image.ts",
+    "blogger:test": "pnpm --filter @zak/db build && pnpm --filter @zak/blogger build && tsx scripts/create-blogger-draft.ts",
     "worker": "pnpm --filter @zak/worker start",
     "doctor": "tsx scripts/doctor.ts"
   },
   "devDependencies": {
+    "@zak/blogger": "workspace:*",
     "@zak/ai": "workspace:*",
     "@zak/core": "workspace:*",
     "@zak/db": "workspace:*",

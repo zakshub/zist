@@ -1,0 +1,3 @@
+import{expect,it}from'vitest';import{buildDraftRequest,markdownToBloggerHtml,MockBloggerProvider}from'./index.js';
+it('renders escaped RTL Blogger HTML',()=>{const html=markdownToBloggerHtml('# عنوان\n\nمتن <script>');expect(html).toContain('dir="rtl"');expect(html).toContain('&lt;script&gt;');expect(html).not.toContain('<script>')});
+it('always creates a deterministic draft request',async()=>{const request=buildDraftRequest('blog','عنوان','# عنوان',['اردو']);expect(request.isDraft).toBe(true);const provider=new MockBloggerProvider();expect((await provider.createDraft(request)).postId).toBe((await provider.createDraft(request)).postId)});

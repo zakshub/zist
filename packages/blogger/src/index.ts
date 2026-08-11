@@ -1,0 +1,8 @@
+import{createHash}from'node:crypto';
+export interface BloggerDraftRequest{blogId:string;isDraft:true;body:{kind:'blogger#post';title:string;content:string;labels:string[]}}
+export interface BloggerDraftResponse{postId:string;url?:string;provider:string;requestHash:string}
+export interface BloggerProvider{createDraft(request:BloggerDraftRequest):Promise<BloggerDraftResponse>}
+function escapeHtml(value:string):string{return value.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;')}
+export function markdownToBloggerHtml(markdown:string,imagePath?:string):string{const blocks=markdown.trim().split(/\n\s*\n/u);const html=blocks.map(block=>{if(block.startsWith('# '))return`<h1>${escapeHtml(block.slice(2))}</h1>`;if(block.startsWith('## '))return`<h2>${escapeHtml(block.slice(3))}</h2>`;return`<p dir="rtl">${escapeHtml(block).replaceAll('\n','<br>')}</p>`}).join('\n');const image=imagePath?`<figure data-local-image="${escapeHtml(imagePath)}"><!-- image upload pending live adapter --></figure>\n`:'';return`${image}<article dir="rtl" lang="ur">\n${html}\n</article>`}
+export function buildDraftRequest(blogId:string,title:string,markdown:string,labels:string[],imagePath?:string):BloggerDraftRequest{return{blogId,isDraft:true,body:{kind:'blogger#post',title,content:markdownToBloggerHtml(markdown,imagePath),labels}}}
+export class MockBloggerProvider implements BloggerProvider{async createDraft(request:BloggerDraftRequest):Promise<BloggerDraftResponse>{if(!request.isDraft)throw new Error('Mock Blogger provider only permits drafts.');const requestHash=createHash('sha256').update(JSON.stringify(request)).digest('hex');return{postId:`mock-${requestHash.slice(0,16)}`,provider:'mock-blogger-v1',requestHash}}}

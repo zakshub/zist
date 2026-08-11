@@ -14,8 +14,8 @@ export default function Dashboard() {
     <main>
       <header><div><span className="eyebrow">LOCAL CONTROL ROOM</span><h1>Zak Content Engine</h1></div><span className="mode">MANUAL MODE</span></header>
       <section className="hero"><div><p className="kicker">آواز محفوظ، عمل قابو میں</p><h2>Your Urdu content system,<br />under human control.</h2></div><div className="guardrail"><strong>Safety lock active</strong><span>Dry run on · Automation off · Providers mocked</span></div></section>
-      <section className="grid">{stages.map(([name, detail, state], index) => <article key={name}><span className="number">0{index + 1}</span><div><h3>{name}</h3><p>{detail}</p></div>{index < 4 ? <Link className="action" href={index === 0 ? '/content-memory' : index === 1 ? '/topics' : index === 2 ? '/articles' : '/images'}>Explore</Link> : <span className={`dot ${state}`} aria-label={state} />}</article>)}</section>
-      <footer><span>Phase 7 · Image System</span><span>Asia/Karachi</span></footer>
+      <section className="grid">{stages.map(([name, detail, state], index) => <article key={name}><span className="number">0{index + 1}</span><div><h3>{name}</h3><p>{detail}</p></div>{index < 5 ? <Link className="action" href={index === 0 ? '/content-memory' : index === 1 ? '/topics' : index === 2 ? '/articles' : index === 3 ? '/images' : '/blogger'}>Explore</Link> : <span className={`dot ${state}`} aria-label={state} />}</article>)}</section>
+      <footer><span>Phase 8 · Blogger Dry Run</span><span>Asia/Karachi</span></footer>
     </main>
   );
 }

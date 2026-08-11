@@ -116,6 +116,15 @@ export function migrate(database: DatabaseSync): void {
       approved_at TEXT, UNIQUE(article_id)
     );
     INSERT OR IGNORE INTO schema_migrations(version) VALUES (6);
+
+    CREATE TABLE IF NOT EXISTS blogger_publications (
+      id TEXT PRIMARY KEY, article_id TEXT NOT NULL UNIQUE REFERENCES articles(id) ON DELETE CASCADE,
+      blog_id TEXT NOT NULL, blogger_post_id TEXT NOT NULL UNIQUE, blogger_url TEXT,
+      request_hash TEXT NOT NULL UNIQUE, is_draft INTEGER NOT NULL CHECK(is_draft=1),
+      status TEXT NOT NULL DEFAULT 'BLOGGER_DRAFT', provider TEXT NOT NULL,
+      created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, published_at TEXT
+    );
+    INSERT OR IGNORE INTO schema_migrations(version) VALUES (7);
   `);
 }
 
@@ -127,3 +136,5 @@ export { ArticleRepository } from './article-repository.js';
 export type { ArticleDraftRecord, NewArticleDraft } from './article-repository.js';
 export { ImageRepository } from './image-repository.js';
 export type { GeneratedImageRecord, NewGeneratedImage } from './image-repository.js';
+export { BloggerPublicationRepository } from './blogger-publication-repository.js';
+export type { BloggerPublicationRecord, NewBloggerPublication, BloggerDraftCandidate } from './blogger-publication-repository.js';

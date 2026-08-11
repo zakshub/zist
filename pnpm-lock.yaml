@@ -17,6 +17,9 @@ importers:
       '@zak/ai':
         specifier: workspace:*
         version: link:packages/ai
+      '@zak/blogger':
+        specifier: workspace:*
+        version: link:packages/blogger
       '@zak/core':
         specifier: workspace:*
         version: link:packages/core
@@ -82,6 +85,8 @@ importers:
       '@zak/db':
         specifier: workspace:*
         version: link:../db
+
+  packages/blogger: {}
 
   packages/core:
     dependencies:

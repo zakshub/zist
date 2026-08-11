@@ -34,3 +34,8 @@ Image direction and rendering are separate. The director persists concept, mood,
 prompt, and negative restrictions before rendering. The local mock renderer produces a real 1600×900
 text-free SVG under ignored storage. `generated_images` retains article association and review state;
 future OpenAI image output will use the same repository contract.
+
+The Blogger boundary mirrors API v3 `POST /blogs/{blogId}/posts?isDraft=true`. Markdown is escaped
+and rendered to RTL HTML before entering the provider. Mock responses retain a SHA-256 request hash;
+the database permits one Blogger publication per article. Live OAuth and the numeric Blog ID are not
+required or touched during dry runs.
