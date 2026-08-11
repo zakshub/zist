@@ -1,9 +1,9 @@
 # Project Status
 
-- Current phase: Phase 12 — Analytics
-- Status: Ready to begin with mock/local observations
-- Last completed milestone: Phase 11 — Scheduling
-- Next: Add immutable performance snapshots, normalized rates, confidence-aware aggregates, and topic/timing feedback views
+- Current phase: Phase 13 — Real Archive Adapter
+- Status: Hardening before private data handoff
+- Last completed milestone: Phase 12 — Analytics
+- Next: Add preview-only archive inspection, privacy scan, transactional import runs, resumability, and final readiness audit before requesting 7,000 posts
 - External integrations: Mocked; no credentials required
 
 ## Phase 1 verification
@@ -110,3 +110,12 @@
 - Facebook workflow states remained unchanged
 - Schedule route: production build passed
 - Lint, typecheck, tests (20), and build: passed
+
+## Phase 12 verification
+
+- Immutable raw Page metrics and normalized derived rates persisted
+- Synthetic provider explicitly stored as `MOCK`
+- Two snapshots created; repeated capture created zero duplicates
+- Aggregates expose reach, engagement rate, CTR, sample count, and confidence
+- Analytics route: production build passed
+- Lint, typecheck, tests (22), and build: passed

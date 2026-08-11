@@ -149,6 +149,16 @@ export function migrate(database: DatabaseSync): void {
       created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
     );
     INSERT OR IGNORE INTO schema_migrations(version) VALUES (10);
+
+    CREATE TABLE IF NOT EXISTS facebook_analytics_snapshots (
+      id TEXT PRIMARY KEY, facebook_page_post_id TEXT NOT NULL REFERENCES facebook_page_posts(id),
+      captured_at TEXT NOT NULL, provider TEXT NOT NULL, impressions INTEGER NOT NULL, reach INTEGER NOT NULL,
+      reactions INTEGER NOT NULL, comments INTEGER NOT NULL, shares INTEGER NOT NULL, link_clicks INTEGER NOT NULL,
+      engagements INTEGER NOT NULL, engagement_rate REAL NOT NULL, click_through_rate REAL NOT NULL,
+      confidence REAL NOT NULL, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      UNIQUE(facebook_page_post_id,captured_at,provider)
+    );
+    INSERT OR IGNORE INTO schema_migrations(version) VALUES (11);
   `);
 }
 
@@ -166,3 +176,4 @@ export { FacebookPagePostRepository } from './facebook-page-post-repository.js';
 export type { FacebookContentCandidate, FacebookPagePostRecord, NewFacebookPagePost } from './facebook-page-post-repository.js';
 export { FacebookDeliveryRepository } from './facebook-delivery-repository.js';
 export { ScheduleRepository } from './schedule-repository.js';
+export { AnalyticsRepository } from './analytics-repository.js';

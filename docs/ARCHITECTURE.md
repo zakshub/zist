@@ -51,3 +51,7 @@ authorization are supplied. Graph API versions are configuration, not hardcoded 
 Scheduling is recommendation-only. Policy `karachi-v1` evaluates fixed local windows, minimum
 opportunity, daily budget, and cross-post gap against UTC timestamps. Recommendations are persisted
 without mutating Facebook workflow state, so timing logic cannot implicitly approve content.
+
+Analytics stores immutable raw counters plus derived rates. Provider and capture time are part of the
+idempotency key. Aggregation recomputes weighted rates from totals rather than averaging percentages,
+and exposes sample size and reach-based confidence. Synthetic observations remain labeled `MOCK`.

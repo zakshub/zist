@@ -23,10 +23,12 @@
     "facebook:content": "pnpm --filter @zak/db build && pnpm --filter @zak/facebook build && tsx scripts/generate-facebook-content.ts",
     "facebook:test": "pnpm --filter @zak/db build && pnpm --filter @zak/facebook build && tsx scripts/test-facebook-delivery.ts",
     "schedule:recommend": "pnpm --filter @zak/db build && pnpm --filter @zak/scheduling build && tsx scripts/recommend-schedule.ts",
+    "analytics:sample": "pnpm --filter @zak/analytics build && pnpm --filter @zak/db build && tsx scripts/seed-analytics.ts",
     "worker": "pnpm --filter @zak/worker start",
     "doctor": "tsx scripts/doctor.ts"
   },
   "devDependencies": {
+    "@zak/analytics": "workspace:*",
     "@zak/scheduling": "workspace:*",
     "@zak/facebook": "workspace:*",
     "@zak/blogger": "workspace:*",

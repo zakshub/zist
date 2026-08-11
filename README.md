@@ -41,6 +41,7 @@ pnpm.cmd generate:image
 pnpm.cmd blogger:test
 pnpm.cmd facebook:content
 pnpm.cmd schedule:recommend
+pnpm.cmd analytics:sample
 ```
 
 ## Quality checks
