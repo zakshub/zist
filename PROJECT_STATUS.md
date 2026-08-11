@@ -1,9 +1,9 @@
 # Project Status
 
-- Current phase: Phase 5 — Topic Engine
+- Current phase: Phase 6 — Article Pipeline
 - Status: Ready to begin
-- Last completed milestone: Phase 4 — Content Analysis
-- Next: Derive topic candidates from analyzed memory with novelty, relevance, quality, and diversity scoring
+- Last completed milestone: Phase 5 — Topic Engine
+- Next: Build angle generation, Urdu article drafting, editorial review, provenance, similarity safety, and versioning
 - External integrations: Mocked; no credentials required
 
 ## Phase 1 verification
@@ -44,3 +44,12 @@
 - Resumable batch: first run analyzed 10; second run analyzed 0
 - Content Memory analysis progress: production build passed
 - Lint, typecheck, tests (8), and build: passed
+
+## Phase 5 verification
+
+- Explainable memory-based scoring with no random primary selection: passed
+- Five candidates generated from ten analyzed posts
+- Repeated refresh produced identical order and scores
+- Topic-to-source provenance links persisted
+- Topic Explorer route: production build passed
+- Lint, typecheck, tests (9), and build: passed

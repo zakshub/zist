@@ -20,3 +20,7 @@ adapter share exactly the same normalization and duplicate rules. Import reports
 Content analysis is provider-neutral. `MockContentAnalyzer` supplies deterministic local results;
 `source_post_analyses` stores versioned output separately from immutable source text. Batch selection
 uses the absence of an analysis row, making interrupted and repeated runs naturally resumable.
+
+Topic ranking version `memory-v1` uses 30% novelty, 25% relevance/evergreen value, 30% source
+quality, and 15% diversity. Every candidate links to its supporting source posts. Refreshes upsert
+scores transactionally and do not duplicate candidates or provenance links.

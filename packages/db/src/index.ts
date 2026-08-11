@@ -71,8 +71,25 @@ export function migrate(database: DatabaseSync): void {
       analyzer_version TEXT NOT NULL, analyzed_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
     );
     INSERT OR IGNORE INTO schema_migrations(version) VALUES (3);
+
+    CREATE TABLE IF NOT EXISTS topics (
+      id TEXT PRIMARY KEY, name TEXT NOT NULL UNIQUE, description TEXT NOT NULL,
+      category TEXT NOT NULL, keywords_json TEXT NOT NULL, status TEXT NOT NULL DEFAULT 'CANDIDATE',
+      novelty_score REAL NOT NULL, relevance_score REAL NOT NULL, quality_score REAL NOT NULL,
+      diversity_score REAL NOT NULL, final_score REAL NOT NULL, generation_count INTEGER NOT NULL DEFAULT 0,
+      last_generated_at TEXT, scoring_version TEXT NOT NULL, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
+    CREATE TABLE IF NOT EXISTS topic_source_posts (
+      topic_id TEXT NOT NULL REFERENCES topics(id) ON DELETE CASCADE,
+      source_post_id TEXT NOT NULL REFERENCES source_posts(id) ON DELETE CASCADE,
+      PRIMARY KEY(topic_id, source_post_id)
+    );
+    INSERT OR IGNORE INTO schema_migrations(version) VALUES (4);
   `);
 }
 
 export { SourcePostRepository } from './source-post-repository.js';
 export type { NewSourcePost, SourcePost, SourcePostSummary } from './source-post-repository.js';
+export { TopicRepository } from './topic-repository.js';
+export type { TopicCandidate, TopicRefreshReport } from './topic-repository.js';
