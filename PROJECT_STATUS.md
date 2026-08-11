@@ -1,9 +1,9 @@
 # Project Status
 
-- Current phase: Phase 9 — Facebook Page Content
-- Status: Ready to begin
-- Last completed milestone: Phase 8 — Blogger Dry Run
-- Next: Generate Facebook Page captions from Blogger-ready articles with variants, link placement, review states, and no API calls
+- Current phase: Phase 10 — Facebook Page API
+- Status: Ready to begin with mock adapter; live Meta credentials deferred
+- Last completed milestone: Phase 9 — Facebook Page Content
+- Next: Verify current official Meta Page publishing documentation, build dry-run adapter, approval guard, and idempotent publish records
 - External integrations: Mocked; no credentials required
 
 ## Phase 1 verification
@@ -82,3 +82,12 @@
 - Request hashes and provider provenance persisted
 - Blogger Queue route: production build passed
 - Lint, typecheck, tests (16), and build: passed
+
+## Phase 9 verification
+
+- Three distinct Urdu Page variants per article: concise, narrative, and question-led
+- Exactly one `BLOG_URL` token and length validation per variant
+- Two article packages created as `WAITING_FOR_BLOG`; third run created nothing
+- Facebook Review route: production build passed
+- No Meta SDK, token, request, scheduling, or publishing code invoked
+- Lint, typecheck, tests (17), and build: passed

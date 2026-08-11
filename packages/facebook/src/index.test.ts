@@ -1,0 +1,2 @@
+import{expect,it}from'vitest';import{MockFacebookContentGenerator,validateVariants}from'./index.js';
+it('generates three distinct valid Urdu Page variants',()=>{const variants=new MockFacebookContentGenerator().generate({title:'معاشرہ: نیا زاویہ',excerpt:'ایک مختصر تعارف',angle:'اختلاف اور مکالمہ',labels:['معاشرہ','فکر']});expect(validateVariants(variants)).toEqual([]);expect(new Set(Object.values(variants)).size).toBe(3)});

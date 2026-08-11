@@ -39,3 +39,7 @@ The Blogger boundary mirrors API v3 `POST /blogs/{blogId}/posts?isDraft=true`. M
 and rendered to RTL HTML before entering the provider. Mock responses retain a SHA-256 request hash;
 the database permits one Blogger publication per article. Live OAuth and the numeric Blog ID are not
 required or touched during dry runs.
+
+Facebook content generation is separate from Meta delivery. Three validated Urdu Page variants are
+stored with a single `BLOG_URL` token and remain `WAITING_FOR_BLOG` while the Blogger record is only
+a mock draft. The schema has no path from generated content directly to published state.

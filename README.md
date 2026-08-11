@@ -39,6 +39,7 @@ pnpm.cmd topics:refresh
 pnpm.cmd generate:article
 pnpm.cmd generate:image
 pnpm.cmd blogger:test
+pnpm.cmd facebook:content
 ```
 
 ## Quality checks

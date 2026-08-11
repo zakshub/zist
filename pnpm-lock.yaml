@@ -26,6 +26,9 @@ importers:
       '@zak/db':
         specifier: workspace:*
         version: link:packages/db
+      '@zak/facebook':
+        specifier: workspace:*
+        version: link:packages/facebook
       '@zak/importer':
         specifier: workspace:*
         version: link:packages/importer
@@ -103,6 +106,8 @@ importers:
       tsx:
         specifier: ^4.21.0
         version: 4.23.12
+
+  packages/facebook: {}
 
   packages/importer:
     dependencies:
